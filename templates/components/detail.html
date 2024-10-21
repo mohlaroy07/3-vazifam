@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+    {% block title %} {{ course.title }} {% endblock %}
+{% block data %}
+<link rel="stylesheet" href="{% static 'css/detail.css' %}">
+<div class="detail-box">
+
+    <h2>{{ course.title }}</h2>
+
+    
+
+    <p>{{ course.description }}</p>
+
+
+
+    {% if user.is_authenticated %}
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="content" placeholder="Write lessons..." required></textarea>
+        <button type="submit">Lesson</button>
+    </form>
+    {% else %}
+    <p>Please <a href="{% url 'login' %}">log in</a> to lesson.</p>
+    {% endif %}
+</div>
+{% endblock data %}
